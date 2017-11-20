@@ -16,4 +16,25 @@ function moveElem(elem, endLeft, endTop, time = 1000){
                    if(progress ===1 ){clearInterval(id)}
                 },1)
                 //downSlideLeft.removeEventListener('scroll',scroll2)
+};
+function changeSizeElem(elem, endSize, time = 1000){
+    let start = Date.now();
+    let x = elem.width;
+    let y = elem.height;
+    
+    let id = setInterval(function(){
+    let timePassed = Date.now() - start;
+    let progress = timePassed/time;
+    
+    
+                //console.log(progress)
+                if (progress > 1) {
+                    progress = 1;
+                }    
+                elem.style.width= x - ((x - endSize) * progress) + 'px';
+                elem.style.height= y - ((y - endSize) * progress) + 'px';
+                //console.log(progress)
+                   if(progress === 1 ){clearInterval(id)}
+                },1)
+                //downSlideLeft.removeEventListener('scroll',scroll2)
 }

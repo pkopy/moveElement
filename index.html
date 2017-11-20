@@ -1,1 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Move element</title>
+    <style>
+    div{
+        height: 100px;
+        width: 100px;
+        left: 10px;
+        position: absolute;
+        
+    }
+    body{
+        height: 2000px;
+        overflow: hidden;
+        background-color: rgb(235, 232, 232);
+    }
+    </style>
+</head>
+<body>
+    <div style="width: 5px; height: 5px; position: absolute; top: 500px; left: 500px; background-color: black"></div>
+    <div id="test">
+        <img id="face" src="face.png" alt="buzka" height="100px" width="100px">
+    </div>
+    <script src="js/moveElem.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        let divElem = document.getElementById('test');
+        let body = document.getElementsByTagName('body')[0];
+        let face = document.getElementById('face');
+        let routeElemX = [];
+        let routeElemY = [];
+        let flag = 0;
+        //console.log(syf)
+        body.addEventListener('click', function(e){
+            
+            let x = e.offsetX
+            let y = e.offsetY
+            if(e.target === body){
+                //moveElem(divElem, x, y, 300);
+                
+                    
+                
 
+            }
+            let i = 0;
+            let id = setInterval(function(){
+                i++
+                let divElemX = Number(divElem.style.left.slice(0,-2));
+                let divElemY = Number(divElem.style.top.slice(0,-2));
+                moveElem(divElem, routeElemX[i], routeElemY[i], 50);
+                if(divElemX >= 500 && divElemY >= 500){
+                    console.log('coś')
+                }
+                if(divElemX >= x){
+                    clearInterval(id)
+                }
+            },50)
+            body.removeEventListener('mousemove', move)
+            //console.log(routeElem)
+        })
+        /*divElem.addEventListener('mouseover', function(){
+            let face = document.getElementById('face');
+            face.src = "face_orange.png";
+            
+        })
+        divElem.addEventListener('mouseout', function(){
+            let face = document.getElementById('face');
+            face.src = "face.png";
+            
+        })*/
+        
+        face.addEventListener('click', function(e){
+            //console.log(x)
+            if(flag === 0){
+                changeSizeElem(face, 50, 500);
+                flag++;
+               
+            }else{
+                changeSizeElem(face, 100, 500);
+                flag = 0;
+                
+            }     
+        })
+        body.addEventListener('mousemove', move)
+            
+        
+        function move(e){
+            routeElemX.push(e.offsetX);
+            routeElemY.push(e.offsetY)
+        }
+    });
+        
+    </script>    
+</body>
+</html>

@@ -1,10 +1,10 @@
 function moveElem(elem, endLeft, endTop, time = 1000){
     let start = Date.now();
-    var x = Number(elem.style.left.slice(0,-2));
-    var y = Number(elem.style.top.slice(0,-2));
-    var id=setInterval(function(){
-    var timePassed = Date.now() - start;
-    var progress = timePassed/time;
+    let x = Number(elem.style.left.slice(0,-2));
+    let y = Number(elem.style.top.slice(0,-2));
+    let id=setInterval(function(){
+    let timePassed = Date.now() - start;
+    let progress = timePassed/time;
     
     
                 //console.log(progress)

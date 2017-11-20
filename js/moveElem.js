@@ -21,7 +21,7 @@ function changeSizeElem(elem, endSize, time = 1000){
     let start = Date.now();
     let x = elem.width;
     let y = elem.height;
-    
+    console.log(x,y)
     let id = setInterval(function(){
     let timePassed = Date.now() - start;
     let progress = timePassed/time;

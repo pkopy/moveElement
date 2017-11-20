@@ -9,8 +9,8 @@
     div{
         height: 100px;
         width: 100px;
-        left: 10px;
-        position: absolute;
+        
+        
         
     }
     body{
@@ -18,35 +18,59 @@
         overflow: hidden;
         background-color: rgb(235, 232, 232);
     }
+    .container{
+        height: 500px;
+        width: 500px;
+        margin: 10px;
+        float: left;
+        border: 1px solid black;
+    }
     </style>
 </head>
 <body>
-    <div style="width: 5px; height: 5px; position: absolute; top: 500px; left: 500px; background-color: black"></div>
-    <div id="test">
-        <img id="face" src="face.png" alt="buzka" height="100px" width="100px">
+    <div class="container" id="left">
+        <div id="test" style="position: absolute">
+            <img id="face" src="face.png" alt="buzka" height="100px" width="100px">
+        </div>
     </div>
+    <div class="container">
+        <div id="test1" style="position: absolute">
+            <img id="face" src="face.png" alt="buzka" height="100px" width="100px">
+        </div>
+    </div>
+    
+    
     <script src="js/moveElem.js"></script>
     <script>
     document.addEventListener("DOMContentLoaded", function(event) {
         let divElem = document.getElementById('test');
+        let divElemLeft = document.getElementById('left');
         let body = document.getElementsByTagName('body')[0];
         let face = document.getElementById('face');
         let routeElemX = [];
         let routeElemY = [];
         let flag = 0;
+        let size = 0;
         //console.log(syf)
-        body.addEventListener('click', function(e){
+        divElemLeft.addEventListener('click', function(e){
             
             let x = e.offsetX
             let y = e.offsetY
-            if(e.target === body){
-                //moveElem(divElem, x, y, 300);
+            console.log(x,y)
+            if(x > (400 + size) && y < (400 + size)){
                 
-                    
+                moveElem(divElem, 420 + size, y + 20 + size, 300);
+            }else if (y > 400 + size && x < 400 + size ){
                 
-
+                moveElem(divElem, x +20, 420 + size, 300);
+            }else if (y > 400 + size && x > 400 + size ){
+                
+                moveElem(divElem, 420 + size, 420 + size, 300);
+            }else{
+                moveElem(divElem, x + 20, y + 20, 300);
             }
-            let i = 0;
+            
+            /*let i = 0;
             let id = setInterval(function(){
                 i++
                 let divElemX = Number(divElem.style.left.slice(0,-2));
@@ -60,7 +84,7 @@
                 }
             },50)
             body.removeEventListener('mousemove', move)
-            //console.log(routeElem)
+            //console.log(routeElem)*/
         })
         /*divElem.addEventListener('mouseover', function(){
             let face = document.getElementById('face');
@@ -76,12 +100,16 @@
         face.addEventListener('click', function(e){
             //console.log(x)
             if(flag === 0){
+                size = 50;
                 changeSizeElem(face, 50, 500);
                 flag++;
-               
+                
+               e.stopPropagation();
             }else{
+                size = 0;
                 changeSizeElem(face, 100, 500);
                 flag = 0;
+                e.stopPropagation();
                 
             }     
         })
